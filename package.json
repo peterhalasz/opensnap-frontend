@@ -1,9 +1,9 @@
 {
-  "name": "angular-seed",
+  "name": "OpenSnap",
   "private": true,
   "version": "0.0.0",
-  "description": "A starter project for AngularJS",
-  "repository": "https://github.com/angular/angular-seed",
+  "description": "Open-source Snake AI Platform",
+  "repository": "https://github.com/peterhalasz/opensnap-frontend/",
   "license": "MIT",
   "devDependencies": {
     "bower": "^1.7.7",
