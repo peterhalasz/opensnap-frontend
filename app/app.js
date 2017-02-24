@@ -3,7 +3,8 @@
   'use strict';
 
   angular.module('openSnap', [
-    'ui.router'
+    'ui.router',
+    'ngMaterial'
   ]).config(osConfig);
 
   osConfig.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
