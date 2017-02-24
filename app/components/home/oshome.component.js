@@ -7,9 +7,9 @@
       templateUrl: 'components/home/oshome.html',
       controller: OsHomeController
     });
-  
+
   function OsHomeController() {
-    
+
   }
 
 })();

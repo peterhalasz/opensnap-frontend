@@ -1,0 +1,45 @@
+.os-vertical-toolbar {
+  width: 80px;
+  height: 100%;
+  position: absolute;
+  background-color: whitesmoke;
+  z-index: 10;
+}
+
+.os-page-title {
+  margin-left: 100px;
+}
+
+.os-logo {
+  color: whitesmoke;
+  height: 40px;
+  animation-name: rotate; 
+  animation-duration: 10s; 
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  cursor: pointer;
+}
+
+@keyframes rotate {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
+
+.os-menu {
+  margin-top: 25px;
+}
+
+.os-home-button {
+  margin-top: 15px !important;
+  opacity: .2;
+}
+
+.os-menu > a:not(.os-home-button) {
+  margin-bottom: 20px !important;
+}
+
+ui-view {
+  margin-left: 115px;
+  position: absolute;
+  top: 90px;
+}

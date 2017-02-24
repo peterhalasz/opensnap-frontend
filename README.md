@@ -1,4 +1,4 @@
-# `OpenSnap` — Open-source Snake AI Programming (frontend)
+# `OpenSnap` — Open-source Snake AI Platform (frontend)
 
 ### Install Dependencies
 

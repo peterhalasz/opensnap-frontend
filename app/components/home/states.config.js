@@ -1,5 +1,5 @@
 (function () {
-  
+
   'use strict';
 
   angular.module('openSnap')
@@ -9,7 +9,10 @@
   function homeConfig($stateProvider) {
     $stateProvider.state('home', {
       url: '/home',
-      component: 'osHome'
+      component: 'osHome',
+      data: {
+        title: 'Dashboard'
+      }
     })
   }
 
