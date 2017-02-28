@@ -43,3 +43,9 @@ ui-view {
   position: absolute;
   top: 90px;
 }
+
+.os-info-button {
+  position: absolute;
+  bottom: 0;
+  left: 13px
+}
