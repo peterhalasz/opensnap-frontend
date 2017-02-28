@@ -14,8 +14,10 @@ After installed npm, bower and gulp, go to project directory and execute:
 
 ```
 npm install
-bower install
 ```
+
+npm install will also trigger "bower install"
+
 After that, you should find out that you have
 two new folders in your project.
 

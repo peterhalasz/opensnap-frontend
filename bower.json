@@ -1,5 +1,5 @@
 {
-  "name": "OpenSnap",
+  "name": "opensnap",
   "description": "Open-source Snake AI Platform",
   "version": "0.0.0",
   "homepage": "https://github.com/peterhalasz/opensnap-frontend",
@@ -13,6 +13,7 @@
     "angular-material": "^1.1.3",
     "material-design-icons": "~3.0.1",
     "angular-ui-codemirror": "^0.3.0",
-    "phaser": "^2.6.2"
+    "phaser": "^2.6.2",
+    "angular-animate": "~1.5.0"
   }
 }
