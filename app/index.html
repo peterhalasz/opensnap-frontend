@@ -1,11 +1,11 @@
-<html>
+<html ng-app="openSnap">
 
 <head>
   <base href="/">
   <meta charset="utf-8">
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>OpenSnap (Snake AI Platform)</title>
+  <title ng-bind="pageTitle + ' | OpenSnap'">OpenSnap</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -17,7 +17,7 @@
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
-<body ng-app="openSnap">
+<body>
   <os-sidenav></os-sidenav>
   <md-toolbar class="md-whiteframe-z1">
     <div class="md-toolbar-tools">
