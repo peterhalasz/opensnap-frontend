@@ -2,7 +2,7 @@
   <div layout="column" layout-align="center center">
     <div class="os-menu" layout="column" layout-align="center center">
       <div ng-repeat="menuItem in $ctrl.menuItems">
-        <md-button class="md-icon-button" ui-sref="{{ menuItem.state }}" ng-class="{'os-home-button': $index == 0, 
+        <md-button class="md-icon-button" ui-sref="{{ menuItem.state }}" ng-class="{'os-home-button': $first, 
         'os-info-button': $last}">
           <md-icon class "material-icons" ng-class="$ctrl.currentState == menuItem.state ? 'os-menu-active' : 
           'os-menu-non-active'">{{ menuItem.icon }}</md-icon>
