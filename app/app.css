@@ -25,17 +25,17 @@
     to {transform: rotate(360deg);}
 }
 
-.os-menu {
-  margin-top: 25px;
-}
-
 .os-home-button {
   margin-top: 15px !important;
-  opacity: .2;
+  margin-bottom: 25px !important;
 }
 
-.os-menu > a:not(.os-home-button) {
+.os-menu > div > a:not(.os-home-button) {
   margin-bottom: 20px !important;
+}
+
+.os-menu > div > a:not(.os-home-button):hover {
+  opacity: .7;
 }
 
 ui-view {
@@ -48,4 +48,12 @@ ui-view {
   position: absolute;
   bottom: 0;
   left: 13px
+}
+
+.os-menu-active {
+  opacity: 1;
+}
+
+.os-menu-non-active {
+  opacity: .4;
 }

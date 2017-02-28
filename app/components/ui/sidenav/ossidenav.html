@@ -1,20 +1,13 @@
 <div class="os-vertical-toolbar md-whiteframe-z1">
-
   <div layout="column" layout-align="center center">
-    <md-button class="md-icon-button os-home-button" ui-sref="home">
-      <md-icon class "material-icons">home</md-icon>
-    </md-button>
-
     <div class="os-menu" layout="column" layout-align="center center">
-      <md-button class="md-icon-button" ui-sref="home">
-        <md-icon class "material-icons">list</md-icon>
-      </md-button>
-      <md-button class="md-icon-button" ui-sref="create">
-        <md-icon class "material-icons">create</md-icon>
-      </md-button>
-      <md-button class="md-icon-button os-info-button" ui-sref="home">
-        <md-icon class "material-icons">info</md-icon>
-      </md-button>
+      <div ng-repeat="menuItem in $ctrl.menuItems">
+        <md-button class="md-icon-button" ui-sref="{{ menuItem.state }}" ng-class="{'os-home-button': $index == 0, 
+        'os-info-button': $last}">
+          <md-icon class "material-icons" ng-class="$ctrl.currentState == menuItem.state ? 'os-menu-active' : 
+          'os-menu-non-active'">{{ menuItem.icon }}</md-icon>
+        </md-button>
+      </div>
     </div>
   </div>
 </div>
