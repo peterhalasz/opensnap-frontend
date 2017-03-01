@@ -13,13 +13,14 @@
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
   <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
   <link rel="stylesheet" href="bower_components/codemirror/lib/codemirror.css">
+  <link rel="stylesheet" href="bower_components/angular-ui-router-anim-in-out/css/anim-in-out.css">
   <link rel="stylesheet" href="app.css">
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
 <body>
   <os-sidenav></os-sidenav>
-  <md-toolbar class="md-whiteframe-z1">
+  <md-toolbar class="md-whiteframe-z1 os-main-toolbar">
     <div class="md-toolbar-tools">
       <h4 class="md-title os-page-title" ui-sref="home" ng-cloak>
         <img src="images/opensnap.svg" class="os-logo"><span>penSnap | {{ pageTitle }}</span>
@@ -27,7 +28,7 @@
     </div>
   </md-toolbar>
 
-  <ui-view></ui-view>
+  <ui-view class="anim-in-out anim-slide-left" data-anim-sync="true" data-anim-speed="1000"></ui-view>
 
   <!--bower components start-->
   <script src="bower_components/angular/angular.js"></script>
@@ -37,6 +38,7 @@
   <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
   <script src="bower_components/angular-ui-codemirror/ui-codemirror.js"></script>
   <script src="bower_components/phaser/build/phaser.js"></script>
+  <script src="bower_components/angular-ui-router-anim-in-out/anim-in-out.js"></script>
   <!--bower components end-->
 
   <!--opensnap start-->
