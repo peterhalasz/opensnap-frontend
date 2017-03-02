@@ -9,8 +9,8 @@
     'anim-in-out'
   ]).config(osConfig);
 
-  osConfig.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$mdThemingProvider', '$transitionsProvider'];
-  function osConfig($stateProvider, $urlRouterProvider, $locationProvider, $mdThemingProvider, $transitionsProvider) {
+  osConfig.$inject = ['$urlRouterProvider', '$locationProvider', '$mdThemingProvider', '$transitionsProvider'];
+  function osConfig($urlRouterProvider, $locationProvider, $mdThemingProvider, $transitionsProvider) {
     $locationProvider.html5Mode(true).hashPrefix('!');
     $urlRouterProvider.otherwise('/home');
     $mdThemingProvider
