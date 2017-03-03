@@ -15,7 +15,7 @@
 
     $ctrl.updateCurrentState = function (state) {
       $ctrl.currentState = state.router.stateService.current.name;
-    }
+    };
 
     $ctrl.$onInit = function () {
       $ctrl.deregisterTransitionHook = $transitions.onSuccess({
@@ -24,11 +24,11 @@
       }, $ctrl.updateCurrentState);
       $ctrl.currentState = $transitions._router.stateService.current.name;
       $ctrl.menuItems = CONFIG.menuItems;
-    }
+    };
 
     $ctrl.$onDestroy = function () {
       $ctrl.deregisterTransitionHook();
-    }
+    };
 
   }
 
