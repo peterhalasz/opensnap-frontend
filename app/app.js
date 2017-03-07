@@ -5,7 +5,6 @@
   angular.module('openSnap', [
     'ui.router',
     'ngMaterial',
-    'ui.codemirror',
     'anim-in-out'
   ]).config(osConfig);
 

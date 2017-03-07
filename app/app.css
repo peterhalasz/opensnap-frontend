@@ -67,3 +67,8 @@ ui-view {
   min-height: 1020px;
   padding: 30px 0 16px 120px;
 }
+
+.os-editor {
+  height: 500px;
+  width: 400px;
+}
