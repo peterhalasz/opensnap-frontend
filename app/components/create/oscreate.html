@@ -1,4 +1,32 @@
 <md-card class="md-whiteframe-z1 os-page-content">
-  Create new snippet
-  <div class="os-editor" ui-codemirror></div>
+  <div layout="row">
+    <div flex="50">
+      <div id="os-editor"></div>
+    </div>
+    <span flex="10"></span>
+    <div flex="40">
+      <form role="form" ng-submit="" method="post" autocomplete="off"
+            name="$ctrl.newSnippetForm">
+        <md-input-container class="os-full-width">
+          <label>Name</label>
+          <input type="text" placeholder="Name of your snippet">
+        </md-input-container>
+        <md-input-container class="os-full-width">
+          <label>Description</label>
+          <textarea rows="9" cols="50" placeholder="Short description"></textarea>
+        </md-input-container>
+        <div layout="row">
+          <md-button class="md-primary md-raised" type="submit" flex="50">
+            <md-icon class="material-icons">save</md-icon>
+            Save
+          </md-button>
+          <md-button class="md-accent md-raised" type="button">
+            <md-icon class="material-icons">play_arrow</md-icon>
+            Run
+          </md-button>
+          </md-button>
+        </div>
+      </form>
+    </div>
+  </div>
 </md-card>

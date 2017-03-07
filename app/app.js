@@ -15,7 +15,7 @@
     $mdThemingProvider
       .theme('default')
       .primaryPalette('teal')
-      .accentPalette('yellow')
+      .accentPalette('red')
       .warnPalette('red')
       .backgroundPalette('grey');
 
