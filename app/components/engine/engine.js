@@ -13,7 +13,7 @@ var Game = {
         food = {};
         squareSize = 15;
         score = 0;
-        speed = 3;
+        speed = 8;
         updateDelay = 0;
         direction = 'RIGHT';
         new_direction = null;
@@ -27,6 +27,9 @@ var Game = {
 
         this.generateFood();
         this.initializeCode();
+
+        this.add.text(30, 20, "SCORE", { font: "bold 14px sans-serif", fill: "#46c0f9", align: "center" });
+        this.scoreText = this.add.text(90, 18, score.toString(), { font: "bold 18px sans-serif", fill: "#fff", align: "center" });
     },
 
     generateFood : function() {
@@ -62,6 +65,7 @@ var Game = {
                 food.destroy();
                 this.generateFood();
                 score++;
+                this.scoreText.setText(score.toString(), true);
             }
         }
     },
@@ -113,14 +117,15 @@ var Game = {
             }
 
             this.checkFoodCollision();
-
             this.checkSelfCollision(firstCell);
-
             this.checkWallCollision(firstCell);
         }
     },
 }
 
 var Game_Over = {
-    preload : function() {}
+    create : function() {
+        this.game.add.text(235, 350, "FINAL SCORE", { font: "bold 16px sans-serif", fill: "#46c0f9", align: "center" });
+        this.game.add.text(350, 348, score.toString(), { font: "bold 20px sans-serif", fill: "#fff", align: "center" });
+    }
 };
