@@ -16,9 +16,14 @@
       $ctrl.editor.setTheme('ace/theme/eclipse');
       $ctrl.editor.getSession().setMode('ace/mode/javascript');
 
+      $ctrl.editor.setValue(
+        "this.moveSnake = function(snakeX, snakeY, foodX, foodY) {\n\ \t// return 'UP', 'DOWN', 'LEFT' or 'RIGHT'\n\}"
+      );
+
       $ctrl.game = new Phaser.Game(600, 600, Phaser.AUTO, 'snake');
 
       $ctrl.game.state.add('Game', Game);
+      $ctrl.game.state.add('Game_Over', Game_Over);
     }
 
     $ctrl.onRunClick = function () {
