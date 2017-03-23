@@ -20,7 +20,7 @@
             <md-icon class="material-icons">save</md-icon>
             Save
           </md-button>
-          <md-button class="md-accent md-raised" type="button" ng-click="$ctrl.onRunClick()">
+          <md-button class="md-accent md-raised" type="button" ng-click="$ctrl.onRunClick($event)">
             <md-icon class="material-icons">play_arrow</md-icon>
             Run
           </md-button>
@@ -29,6 +29,4 @@
       </form>
     </div>
   </div>
-  <!--TODO: Snake display should be moved somewhere else-->
-  <div id="snake"></div>
 </md-card>

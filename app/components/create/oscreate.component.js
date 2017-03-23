@@ -8,7 +8,8 @@
       controller: OsCreateController
     });
 
-  function OsCreateController() {
+  OsCreateController.$inject = ['$mdDialog'];
+  function OsCreateController($mdDialog) {
     var $ctrl = this;
 
     $ctrl.$onInit = function () {
@@ -17,18 +18,28 @@
       $ctrl.editor.getSession().setMode('ace/mode/javascript');
 
       $ctrl.editor.setValue(
-        "this.moveSnake = function(snakeX, snakeY, foodX, foodY) {\n\ \t// return 'UP', 'DOWN', 'LEFT' or 'RIGHT'\n\}"
+        "/**\n* Function for controlling snake movement\n" +
+        "* @param snakeX - Snake's X axis coordinate\n" +
+        "* @param snakeY - Snake's Y axis coordinate\n" +
+        "* @param foodX - Food's X axis coordinate\n" +
+        "* @param foodY - Food's Y axis coordinate\n" +
+        "* return 'UP', 'RIGHT', 'LEFT' or 'RIGHT'\n" +
+        "*/\nthis.moveSnake = function(snakeX, snakeY, foodX, foodY) {\n\t\n\n\n}\n"
       );
+    };
 
-      $ctrl.game = new Phaser.Game(600, 600, Phaser.AUTO, 'snake');
-
-      $ctrl.game.state.add('Game', Game);
-      $ctrl.game.state.add('Game_Over', Game_Over);
-    }
-
-    $ctrl.onRunClick = function () {
-      Game.code = $ctrl.editor.getValue();
-      $ctrl.game.state.start('Game');
+    $ctrl.onRunClick = function (ev) {
+      $mdDialog.show({
+        controller: 'OsRunController',
+        templateUrl: 'components/create/run/osrun.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose: false,
+        controllerAs: '$ctrl',
+        locals: {
+          gameCode: $ctrl.editor.getValue()
+        }
+      });
     }
 
   }

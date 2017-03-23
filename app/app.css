@@ -77,3 +77,16 @@ ui-view {
 .os-full-width {
   width: 100%;
 }
+
+.os-run-dialog {
+  height: 650px;
+  width: 1000px;
+}
+
+.os-run-dialog-content {
+  overflow: hidden;
+}
+
+.os-run-loader {
+  padding-top: 250px;
+}

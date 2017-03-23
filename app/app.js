@@ -21,6 +21,9 @@
 
     $transitionsProvider.onStart({to: '*', from: '*'}, function (transition) {
       var $rootScope = transition.injector().get('$rootScope');
+      var $mdDialog = transition.injector().get('$mdDialog');
+      $mdDialog.hide();
+
     });
 
     $transitionsProvider.onSuccess({to: '*', from: '*'}, function (transition) {
