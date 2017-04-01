@@ -13,7 +13,7 @@ var Game = {
     score = 0;
     speed = 8;
     updateDelay = 0;
-    direction = 'RIGHT';
+    currentDirection = 'RIGHT';
     newDirection = null;
     addNew = false;
     initialSnakeSize = 10;
@@ -23,20 +23,29 @@ var Game = {
 
     this.game.world.setBounds(0, 0, mapWidth*tileSize, mapHeight*tileSize);
 
+    this.initializeSnake();
+    this.initializeBorders();
+    this.generateFood();
+    this.initializeCode();
+    this.displayScore();
+  },
+
+  initializeSnake: function() {
+    for (var i = 0; i < initialSnakeSize; i++) {
+      snake[i] = this.game.add.sprite(tileSize*10 + i * tileSize, tileSize*10, 'snakeCellImage');
+    }
+  },
+
+  initializeBorders: function() {
     for (var y = 0; y < mapHeight+1; y++) {
       for (var x = 0; x < mapWidth+1; x++) {
         if (x == 0 || x == mapWidth || y == 0 || y == mapHeight)
           this.game.add.sprite(x*tileSize, y*tileSize, 'obstacleImage');
       }
     }
+  },
 
-    for (var i = 0; i < initialSnakeSize; i++) {
-      snake[i] = this.game.add.sprite(tileSize*10 + i * tileSize, tileSize*10, 'snakeCellImage');
-    }
-
-    this.generateFood();
-    this.initializeCode();
-
+  displayScore: function() {
     this.add.text(30, 20, 'SCORE:', {
       font: 'bold 16px sans-serif',
       fill: '#46c0f9',
@@ -92,35 +101,44 @@ var Game = {
     updateDelay++;
 
     if (updateDelay % (10 - speed) == 0) {
+      var snakeHead = this.repositionSnake();
+
+      this.checkFoodCollision();
+      this.checkSelfCollision(snakeHead);
+      this.checkWallCollision(snakeHead);
+    }
+  },
+
+  repositionSnake: function() {
       var firstCell = snake[snake.length - 1];
       var lastCell = snake.shift();
-      var oldLastCellx = lastCell.x;
+      var oldLastCellY = lastCell.x;
       var oldLastCelly = lastCell.y;
 
       newDirection = this.moveSnake(firstCell.x, firstCell.y, food.x, food.y);
 
-      if (direction == newDirection) {
+      if (currentDirection == newDirection) {
         newDirection = null;
       }
 
       if (newDirection) {
-        direction = newDirection;
+        currentDirection = newDirection;
         newDirection = null;
       }
 
-      if (direction == 'RIGHT') {
+      if (currentDirection == 'RIGHT') {
         lastCell.x = firstCell.x + tileSize;
         lastCell.y = firstCell.y;
       }
-      else if (direction == 'LEFT') {
+      else if (currentDirection == 'LEFT') {
         lastCell.x = firstCell.x - tileSize;
         lastCell.y = firstCell.y;
       }
-      else if (direction == 'UP') {
+      else if (currentDirection == 'UP') {
         lastCell.x = firstCell.x;
         lastCell.y = firstCell.y - tileSize;
       }
-      else if (direction == 'DOWN') {
+      else if (currentDirection == 'DOWN') {
         lastCell.x = firstCell.x;
         lastCell.y = firstCell.y + tileSize;
       }
@@ -129,14 +147,11 @@ var Game = {
       firstCell = lastCell;
 
       if (addNew) {
-        snake.unshift(this.game.add.sprite(oldLastCellx, oldLastCelly, 'snakeCellImage'));
+        snake.unshift(this.game.add.sprite(oldLastCellY, oldLastCelly, 'snakeCellImage'));
         addNew = false;
       }
 
-      this.checkFoodCollision();
-      this.checkSelfCollision(firstCell);
-      this.checkWallCollision(firstCell);
-    }
+      return firstCell;
   }
 };
 
