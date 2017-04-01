@@ -9,9 +9,9 @@
     var $ctrl = this;
 
     $ctrl.initGame = function () {
-      $ctrl.game = new Phaser.Game(1000, 500, Phaser.AUTO, 'snake');
+      $ctrl.game = new Phaser.Game(1000, 650, Phaser.AUTO, 'snake');
       $ctrl.game.state.add('Game', Game);
-      $ctrl.game.state.add('Game_Over', Game_Over);
+      $ctrl.game.state.add('GameOver', GameOver);
       $ctrl.isLoading = false;
       Game.code = gameCode;
       $ctrl.game.state.start('Game');
