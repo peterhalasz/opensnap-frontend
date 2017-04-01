@@ -24,8 +24,13 @@
         "* @param foodX - Food's X axis coordinate\n" +
         "* @param foodY - Food's Y axis coordinate\n" +
         "* return 'UP', 'RIGHT', 'LEFT' or 'RIGHT'\n" +
-        "*/\nthis.moveSnake = function(snakeX, snakeY, foodX, foodY) {\n\t\n\n\n}\n"
-      );
+        "*/\nthis.moveSnake = function(snakeX, snakeY, foodX, foodY) {" +
+        "\n\tif (snakeX > foodX) {\n\t\treturn 'LEFT'" +
+        "\n\t} else if (snakeX < foodX) {\n\t\treturn 'RIGHT'" +
+        "\n\t} else if (snakeY < foodY) {\n\t\treturn 'DOWN'" +
+        "\n\t} else {\n\t\treturn 'UP'\n\t}" +
+        "\n}\n");
+
     };
 
     $ctrl.onRunClick = function (ev) {

@@ -9,7 +9,7 @@
     var $ctrl = this;
 
     $ctrl.initGame = function () {
-      $ctrl.game = new Phaser.Game(1000, 650, Phaser.AUTO, 'snake');
+      $ctrl.game = new Phaser.Game(610, 610, Phaser.AUTO, 'snake');
       $ctrl.game.state.add('Game', Game);
       $ctrl.game.state.add('GameOver', GameOver);
       $ctrl.isLoading = false;

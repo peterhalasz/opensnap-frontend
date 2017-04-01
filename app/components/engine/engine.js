@@ -3,24 +3,35 @@ var Game = {
   preload: function() {
     this.game.load.image('snakeCellImage', '../images/panel_blue.png');
     this.game.load.image('foodImage', '../images/iconCircle_grey.png');
+    this.game.load.image('obstacleImage', '../images/panel_beigeLight.png');
   },
 
   create: function() {
     snake = [];
     food = {};
-    squareSize = 15;
+    tileSize = 10;
     score = 0;
     speed = 8;
     updateDelay = 0;
     direction = 'RIGHT';
     newDirection = null;
     addNew = false;
-    initialSize = 10;
+    initialSnakeSize = 10;
 
-    this.game.world.setBounds(0, 0, 1000, 650);
+    mapWidth = 60;
+    mapHeight = 60;
 
-    for (var i = 0; i < initialSize; i++) {
-      snake[i] = this.game.add.sprite(150 + i * squareSize, 150, 'snakeCellImage');
+    this.game.world.setBounds(0, 0, mapWidth*tileSize, mapHeight*tileSize);
+
+    for (var y = 0; y < mapHeight+1; y++) {
+      for (var x = 0; x < mapWidth+1; x++) {
+        if (x == 0 || x == mapWidth || y == 0 || y == mapHeight)
+          this.game.add.sprite(x*tileSize, y*tileSize, 'obstacleImage');
+      }
+    }
+
+    for (var i = 0; i < initialSnakeSize; i++) {
+      snake[i] = this.game.add.sprite(tileSize*10 + i * tileSize, tileSize*10, 'snakeCellImage');
     }
 
     this.generateFood();
@@ -40,11 +51,10 @@ var Game = {
   },
 
   generateFood: function() {
-    // TODO: Align food image properly
-    var randomX = Math.floor(Math.random() * 40) * squareSize;
-    var randomY = Math.floor(Math.random() * 40) * squareSize;
+    var randomX = Math.floor(Math.random() * (mapWidth - 1)) + 1;
+    var randomY = Math.floor(Math.random() * (mapHeight - 1)) + 1;
 
-    food = this.game.add.sprite(randomX, randomY, 'foodImage');
+    food = this.game.add.sprite(randomX*tileSize, randomY*tileSize, 'foodImage');
   },
 
   initializeCode: function() {
@@ -60,7 +70,8 @@ var Game = {
   },
 
   checkWallCollision: function(head) {
-    if (head.x >= 1000 || head.x < 0 || head.y >= 650 || head.y < 0) {
+    if (head.x >= mapWidth*tileSize-tileSize || head.x == 0 ||
+        head.y >= mapHeight*tileSize-tileSize || head.y == 0) {
       this.state.start('GameOver');
     }
   },
@@ -98,20 +109,20 @@ var Game = {
       }
 
       if (direction == 'RIGHT') {
-        lastCell.x = firstCell.x + 15;
+        lastCell.x = firstCell.x + tileSize;
         lastCell.y = firstCell.y;
       }
       else if (direction == 'LEFT') {
-        lastCell.x = firstCell.x - 15;
+        lastCell.x = firstCell.x - tileSize;
         lastCell.y = firstCell.y;
       }
       else if (direction == 'UP') {
         lastCell.x = firstCell.x;
-        lastCell.y = firstCell.y - 15;
+        lastCell.y = firstCell.y - tileSize;
       }
       else if (direction == 'DOWN') {
         lastCell.x = firstCell.x;
-        lastCell.y = firstCell.y + 15;
+        lastCell.y = firstCell.y + tileSize;
       }
 
       snake.push(lastCell);
@@ -131,13 +142,13 @@ var Game = {
 
 var GameOver = {
   create: function() {
-    this.game.add.text(420, 230, 'FINAL SCORE:', {
+    this.game.add.text(240, 280, 'FINAL SCORE:', {
       font: 'bold 16px sans-serif',
       fill: '#46c0f9',
       align: 'center'
     });
 
-    this.game.add.text(540, 230, score.toString(), {
+    this.game.add.text(360, 280, score.toString(), {
       font: 'bold 16px sans-serif',
       fill: '#fff',
       align: 'center'
