@@ -5,7 +5,8 @@
   angular.module('openSnap', [
     'ui.router',
     'ngMaterial',
-    'anim-in-out'
+    'anim-in-out',
+    'ngResource'
   ]).config(osConfig);
 
   osConfig.$inject = ['$urlRouterProvider', '$locationProvider', '$mdThemingProvider', '$transitionsProvider'];
