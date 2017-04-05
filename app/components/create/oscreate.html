@@ -5,15 +5,15 @@
     </div>
     <span flex="10"></span>
     <div flex="40">
-      <form role="form" ng-submit="" method="post" autocomplete="off"
+      <form role="form" ng-submit="$ctrl.updateSnippet()" method="post" autocomplete="off"
             name="$ctrl.newSnippetForm">
         <md-input-container class="os-full-width">
           <label>Name</label>
-          <input type="text" placeholder="Name of your snippet">
+          <input type="text" placeholder="Name of your snippet" required ng-model="$ctrl.snippet.name">
         </md-input-container>
         <md-input-container class="os-full-width">
           <label>Description</label>
-          <textarea rows="9" cols="50" placeholder="Short description"></textarea>
+          <textarea rows="9" cols="50" placeholder="Short description" required ng-model="$ctrl.snippet.description"></textarea>
         </md-input-container>
         <div layout="row">
           <md-button class="md-primary md-raised" type="submit" flex="50">

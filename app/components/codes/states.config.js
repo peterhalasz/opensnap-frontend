@@ -8,10 +8,15 @@
   homeConfig.$inject = ['$stateProvider'];
   function homeConfig($stateProvider) {
     $stateProvider.state('codes', {
-      url: '/codes',
+      url: '/snippets',
       component: 'osCodes',
       data: {
-        title: 'Codes'
+        title: 'Snippets'
+      },
+      resolve: {
+        snippets: ['OsSnippetApi', function (OsSnippetApi) {
+          return OsSnippetApi.service.query();
+        }]
       }
     })
   }

@@ -5,11 +5,14 @@
   angular.module('openSnap')
     .component('osCreate', {
       templateUrl: 'components/create/oscreate.html',
-      controller: OsCreateController
+      controller: OsCreateController,
+      bindings: {
+        snippet: '<'
+      }
     });
 
-  OsCreateController.$inject = ['$mdDialog'];
-  function OsCreateController($mdDialog) {
+  OsCreateController.$inject = ['$mdDialog', 'OsSnippetApi', '$mdToast'];
+  function OsCreateController($mdDialog, OsSnippetApi, $mdToast) {
     var $ctrl = this;
 
     $ctrl.$onInit = function () {
@@ -47,8 +50,25 @@
           gameCode: $ctrl.editor.getValue()
         }
       });
-    }
+    };
 
+    $ctrl.updateSnippet = function () {
+      if ($ctrl.newSnippetForm.invalid) return;
+      var toastText = 'Snipped saved successfully!';
+      $ctrl.snippet.code = $ctrl.editor.getValue();
+      OsSnippetApi.service.save($ctrl.snippet).$promise.then(function (data) {
+        $ctrl.snippet.id = data.id;
+      }, function (error) {
+        toastText = 'Error while saving snippet!';
+      }).finally(function () {
+        $mdToast.show(
+          $mdToast.simple()
+            .textContent(toastText)
+            .position('bottom')
+            .hideDelay(3000)
+        );
+      });
+    };
   }
 
 })();

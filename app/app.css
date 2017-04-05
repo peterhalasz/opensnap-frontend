@@ -1,92 +1,113 @@
 .os-vertical-toolbar {
-  width: 80px;
-  height: 100%;
-  position: fixed;
-  background-color: whitesmoke;
-  z-index: 10;
+    width: 80px;
+    height: 100%;
+    position: fixed;
+    background-color: whitesmoke;
+    z-index: 10;
 }
 
 .os-page-title {
-  margin-left: 100px;
+    margin-left: 100px;
 }
 
 .os-main-toolbar {
-  position: fixed;
-  z-index: 5;
+    position: fixed;
+    z-index: 5;
 }
 
 .os-logo {
-  color: whitesmoke;
-  height: 34px;
-  animation-name: rotate; 
-  animation-duration: 10s; 
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  cursor: pointer;
+    color: whitesmoke;
+    height: 34px;
+    animation-name: rotate;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    cursor: pointer;
 }
 
 @keyframes rotate {
-    from {transform: rotate(0deg);}
-    to {transform: rotate(360deg);}
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .os-home-button {
-  margin-top: 15px !important;
-  margin-bottom: 25px !important;
+    margin-top: 15px !important;
+    margin-bottom: 25px !important;
 }
 
 .os-menu > div > a:not(.os-home-button) {
-  margin-bottom: 20px !important;
+    margin-bottom: 20px !important;
 }
 
 .os-menu > div > a:not(.os-home-button):hover {
-  opacity: .7;
+    opacity: .7;
 }
 
 ui-view {
-  position: absolute;
-  top: 90px;
-  width: 100%;
+    position: absolute;
+    top: 90px;
+    width: 100%;
 }
 
 .os-info-button {
-  position: absolute;
-  bottom: 0;
-  left: 13px
+    position: absolute;
+    bottom: 0;
+    left: 13px
 }
 
 .os-menu-active {
-  opacity: 1;
+    opacity: 1;
 }
 
 .os-menu-non-active {
-  opacity: .4;
+    opacity: .4;
 }
 
 .os-page-content {
-  margin: 0 34px 34px 0;
-  min-height: 1020px;
-  padding: 30px 30px 16px 120px;
+    margin: 0 34px 34px 0;
+    min-height: 1020px;
+    padding: 30px 30px 16px 120px;
 }
 
 #os-editor {
-  height: 700px;
-  border: 1px solid lightgrey;
+    height: 700px;
+    border: 1px solid lightgrey;
 }
 
 .os-full-width {
-  width: 100%;
+    width: 100%;
 }
 
 .os-run-dialog {
-  height: 675px;
-  width: 610px;
+    height: 675px;
+    width: 610px;
 }
 
 .os-run-dialog-content {
-  overflow: hidden;
+    overflow: hidden;
 }
 
 .os-run-loader {
-  padding-top: 250px;
+    padding-top: 250px;
+}
+
+md-list-item {
+    border-bottom: 1px solid lightgrey;
+}
+
+md-list-item:hover {
+    border-bottom: 1px solid lightgrey;
+    background-color: rgba(0,0,0,0.1);
+}
+
+.list-button-right {
+    margin: auto;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    float: right;
+    text-align: right;
 }

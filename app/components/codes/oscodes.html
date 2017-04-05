@@ -1,3 +1,15 @@
 <md-card class="md-whiteframe-z1 os-page-content">
-  Code List
+  <md-list layout-padding>
+    <md-list-item class="md-3-line" ng-repeat="snippet in $ctrl.snippets">
+      <div class="md-list-item-text">
+        <h3><b>Name</b>: {{ snippet.name }}</h3>
+        <h4><b>Description</b>: {{ snippet.description }}</h4>
+      </div>
+      <div class="list-button-right">
+        <md-button class="md-icon-button" ui-sref="edit({id: snippet._id})">
+          <md-icon class="material-icons">arrow_right</md-icon>
+        </md-button>
+      </div>
+    </md-list-item>
+  </md-list>
 </md-card>
