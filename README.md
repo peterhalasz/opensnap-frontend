@@ -24,6 +24,9 @@ two new folders in your project.
 * `node_modules` - contains the npm packages for the tools we need
 * `app/bower_components` - contains the Angular framework files
 
+### Fill in settings
+Copy app/template_constants.js contents to app/constants.js, then fill in settings.
+
 ### Run the Application
 
 We have preconfigured the project with a simple development web server. The simplest way to start

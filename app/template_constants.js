@@ -5,9 +5,9 @@
   angular.module('openSnap')
     .constant('CONFIG', {
       menuItems: [{
-          state: 'home',
-          icon: 'home'
-        },
+        state: 'home',
+        icon: 'home'
+      },
         {
           state: 'codes',
           icon: 'code'
@@ -20,7 +20,8 @@
           state: 'info',
           icon: 'info'
         }
-      ]
+      ],
+      backendUrl: ''
     })
 
 })();
