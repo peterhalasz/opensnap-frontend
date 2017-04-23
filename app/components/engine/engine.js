@@ -13,18 +13,20 @@ var Game = {
     score = 0;
     speed = 7;
     updateDelay = 0;
+    mapSize = 60;
+    initialSnakeSize = 10;
+    numberOfInitialObstacles = 15;
     currentDirection = 'RIGHT';
     newDirection = null;
     addNew = false;
-    initialSnakeSize = 10;
+    map = this.createInitialMap();
 
-    mapWidth = 61;
-    mapHeight = 61;
-
-    this.game.world.setBounds(0, 0, mapWidth*tileSize, mapHeight*tileSize);
+    this.game.world.setBounds(0, 0, mapSize*tileSize, mapSize*tileSize);
 
     this.initializeSnake();
     this.initializeMap();
+    this.initializeObstacles();
+    this.initializeFood();
     this.initializeCode();
     this.displayScore();
   },
@@ -39,19 +41,63 @@ var Game = {
     }
   },
 
-  initializeMap: function() {
-    for (var y = 0; y < mapHeight+1; y++) {
-      for (var x = 0; x < mapWidth+1; x++) {
-        if (x == 0 || x == mapWidth || y == 0 || y == mapHeight)
-          this.game.add.sprite(x*tileSize, y*tileSize, 'obstacleImage');
+  createInitialMap: function() {
+    var initialMap = [];
+
+    for (var i = 0; i < mapSize + 1; i++) {
+      initialMap[i] = [];
+      for (var j = 0; j < mapSize + 1; j++) {
+        initialMap[i][j] = {
+          x: i,
+          y: j,
+          type: 'T'
+        };
       }
     }
 
+    return initialMap;
+  },
+
+  initializeMap: function() {
+    for (var y = 0; y < mapSize+1; y++) {
+      for (var x = 0; x < mapSize+1; x++) {
+        if (x == 0 || x == mapSize || y == 0 || y == mapSize) {
+          map[x][y].sprite = this.game.add.sprite(x*tileSize, y*tileSize, 'obstacleImage');
+          map[x][y].type = 'O';
+        }
+      }
+    }
+  },
+
+  initializeFood: function() {
+    do {
+      // HACK: Putting the inital food in the lower right corner
+      // for the dummy code to work in every case
+      var randomX = Math.floor(Math.random() * (mapSize - 30 + 1)) + 30;
+      var randomY = Math.floor(Math.random() * (mapSize - 30 + 1)) + 30;
+      var mapTile = map[randomX][randomY];
+    } while (mapTile.type != 'T')
+
     food = {
-      x: 50,
-      y: 50,
-      sprite: this.game.add.sprite(50*tileSize, 50*tileSize, 'foodImage')
+      x: mapTile.x,
+      y: mapTile.y,
+      sprite: this.game.add.sprite(mapTile.x*tileSize, mapTile.y*tileSize, 'foodImage')
     };
+  },
+
+  initializeObstacles : function() {
+    for (var i = 0; i < numberOfInitialObstacles; i++) {
+      do {
+        var randomX = Math.floor(Math.random() * (mapSize - 1)) + 1;
+        var randomY = Math.floor(Math.random() * (mapSize - 1)) + 1;
+
+        var mapTile = map[randomX][randomY];
+      } while (mapTile.type != 'T' && mapTile.x != 19 && mapTile.y != 10)
+      // HACK: Avoid putting an obstacle on the newborn snakey's head
+
+      mapTile.type = 'O';
+      map[randomX][randomY].sprite = this.game.add.sprite(randomX*tileSize, randomY*tileSize, 'obstacleImage');
+    }
   },
 
   displayScore: function() {
@@ -69,13 +115,16 @@ var Game = {
   },
 
   generateFood: function() {
-    var randomX = Math.floor(Math.random() * (mapWidth - 1)) + 1;
-    var randomY = Math.floor(Math.random() * (mapHeight - 1)) + 1;
+    do {
+      var randomX = Math.floor(Math.random() * (mapSize - 1)) + 1;
+      var randomY = Math.floor(Math.random() * (mapSize - 1)) + 1;
+      var mapTile = map[randomX][randomY];
+    } while (mapTile.type != 'T')
 
     food = {
-      x: randomX,
-      y: randomY,
-      sprite: this.game.add.sprite(randomX*tileSize, randomY*tileSize, 'foodImage')
+      x: mapTile.x,
+      y: mapTile.y,
+      sprite: this.game.add.sprite(mapTile.x*tileSize, mapTile.y*tileSize, 'foodImage')
     };
   },
 
@@ -91,9 +140,9 @@ var Game = {
     }
   },
 
-  checkWallCollision: function(head) {
-    if (head.x >= mapWidth || head.x == 0 ||
-        head.y >= mapHeight || head.y == 0) {
+  checkObstacleCollision: function(head) {
+    var mapTile = map[head.x][head.y];
+    if (mapTile.type == 'O') {
       this.state.start('GameOver');
     }
   },
@@ -118,7 +167,7 @@ var Game = {
 
       this.checkFoodCollision();
       this.checkSelfCollision(snakeHead);
-      this.checkWallCollision(snakeHead);
+      this.checkObstacleCollision(snakeHead);
     }
   },
 
@@ -131,7 +180,7 @@ var Game = {
       var oldLastCellX = lastCell.x;
       var oldLastCellY = lastCell.y;
 
-      newDirection = this.moveSnake(snake, {x: food.x, y: food.y});
+      newDirection = this.moveSnake(snake, food, map);
 
       if (currentDirection == newDirection) {
         newDirection = null;
