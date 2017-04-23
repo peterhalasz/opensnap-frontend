@@ -18,7 +18,7 @@
     };
 
     $scope.$on('$destroy', function () {
-      $ctrl.game = null;
+      $ctrl.game.destroy();
     });
 
     $ctrl.close = function () {
