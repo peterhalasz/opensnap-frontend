@@ -25,7 +25,6 @@ var Game = {
 
     this.initializeSnake();
     this.initializeMap();
-    this.generateFood();
     this.initializeCode();
     this.displayScore();
   },
@@ -47,6 +46,12 @@ var Game = {
           this.game.add.sprite(x*tileSize, y*tileSize, 'obstacleImage');
       }
     }
+
+    food = {
+      x: 50,
+      y: 50,
+      sprite: this.game.add.sprite(50*tileSize, 50*tileSize, 'foodImage')
+    };
   },
 
   displayScore: function() {
