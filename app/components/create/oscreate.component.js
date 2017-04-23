@@ -19,18 +19,16 @@
 
       $ctrl.editor.setValue(
         "/**\n* Function for controlling snake movement\n" +
-        "* @param snakeX - Snake's X axis coordinate\n" +
-        "* @param snakeY - Snake's Y axis coordinate\n" +
-        "* @param foodX - Food's X axis coordinate\n" +
-        "* @param foodY - Food's Y axis coordinate\n" +
+        "* @param snake - The snake's cells in an array of objects containing x and y coordinates\n" +
+        "* @param food - The food's cells in an object of x and y\n" +
         "* return 'UP', 'RIGHT', 'LEFT' or 'RIGHT'\n" +
-        "*/\nthis.moveSnake = function(snakeX, snakeY, foodX, foodY) {" +
-        "\n\tif (snakeX > foodX) {\n\t\treturn 'LEFT'" +
-        "\n\t} else if (snakeX < foodX) {\n\t\treturn 'RIGHT'" +
-        "\n\t} else if (snakeY < foodY) {\n\t\treturn 'DOWN'" +
+        "*/\nthis.moveSnake = function(snake, food) {" +
+        "\n\tvar head = snake[snake.length-1];" +
+        "\n\tif (head.x > food.x) {\n\t\treturn 'LEFT'" +
+        "\n\t} else if (head.x < food.x) {\n\t\treturn 'RIGHT'" +
+        "\n\t} else if (head.y < food.y) {\n\t\treturn 'DOWN'" +
         "\n\t} else {\n\t\treturn 'UP'\n\t}" +
         "\n}\n");
-
     };
 
     $ctrl.onRunClick = function (ev) {

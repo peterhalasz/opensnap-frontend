@@ -11,20 +11,20 @@ var Game = {
     food = {};
     tileSize = 10;
     score = 0;
-    speed = 8;
+    speed = 7;
     updateDelay = 0;
     currentDirection = 'RIGHT';
     newDirection = null;
     addNew = false;
     initialSnakeSize = 10;
 
-    mapWidth = 60;
-    mapHeight = 60;
+    mapWidth = 61;
+    mapHeight = 61;
 
     this.game.world.setBounds(0, 0, mapWidth*tileSize, mapHeight*tileSize);
 
     this.initializeSnake();
-    this.initializeBorders();
+    this.initializeMap();
     this.generateFood();
     this.initializeCode();
     this.displayScore();
@@ -32,11 +32,15 @@ var Game = {
 
   initializeSnake: function() {
     for (var i = 0; i < initialSnakeSize; i++) {
-      snake[i] = this.game.add.sprite(tileSize*10 + i * tileSize, tileSize*10, 'snakeCellImage');
+      snake[i] = {
+        sprite: this.game.add.sprite(tileSize*10 + i * tileSize, tileSize*10, 'snakeCellImage'),
+        x: i + 10,
+        y: 10
+      };
     }
   },
 
-  initializeBorders: function() {
+  initializeMap: function() {
     for (var y = 0; y < mapHeight+1; y++) {
       for (var x = 0; x < mapWidth+1; x++) {
         if (x == 0 || x == mapWidth || y == 0 || y == mapHeight)
@@ -63,7 +67,11 @@ var Game = {
     var randomX = Math.floor(Math.random() * (mapWidth - 1)) + 1;
     var randomY = Math.floor(Math.random() * (mapHeight - 1)) + 1;
 
-    food = this.game.add.sprite(randomX*tileSize, randomY*tileSize, 'foodImage');
+    food = {
+      x: randomX,
+      y: randomY,
+      sprite: this.game.add.sprite(randomX*tileSize, randomY*tileSize, 'foodImage')
+    };
   },
 
   initializeCode: function() {
@@ -79,8 +87,8 @@ var Game = {
   },
 
   checkWallCollision: function(head) {
-    if (head.x >= mapWidth*tileSize-tileSize || head.x == 0 ||
-        head.y >= mapHeight*tileSize-tileSize || head.y == 0) {
+    if (head.x >= mapWidth || head.x == 0 ||
+        head.y >= mapHeight || head.y == 0) {
       this.state.start('GameOver');
     }
   },
@@ -89,7 +97,7 @@ var Game = {
     for (var i = 0; i < snake.length; i++) {
       if (snake[i].x == food.x && snake[i].y == food.y) {
         addNew = true;
-        food.destroy();
+        food.sprite.destroy();
         this.generateFood();
         score++;
         scoreText.setText(score.toString(), true);
@@ -110,12 +118,15 @@ var Game = {
   },
 
   repositionSnake: function() {
+      // TODO: Cleanup!
       var firstCell = snake[snake.length - 1];
       var lastCell = snake.shift();
-      var oldLastCellY = lastCell.x;
-      var oldLastCelly = lastCell.y;
+      var oldLastCellSpriteX = lastCell.sprite.x;
+      var oldLastCellSpriteY = lastCell.sprite.y;
+      var oldLastCellX = lastCell.x;
+      var oldLastCellY = lastCell.y;
 
-      newDirection = this.moveSnake(firstCell.x, firstCell.y, food.x, food.y);
+      newDirection = this.moveSnake(snake, {x: food.x, y: food.y});
 
       if (currentDirection == newDirection) {
         newDirection = null;
@@ -127,27 +138,43 @@ var Game = {
       }
 
       if (currentDirection == 'RIGHT') {
-        lastCell.x = firstCell.x + tileSize;
+        lastCell.sprite.x = firstCell.sprite.x + tileSize;
+        lastCell.sprite.y = firstCell.sprite.y;
+
+        lastCell.x = firstCell.x + 1;
         lastCell.y = firstCell.y;
       }
       else if (currentDirection == 'LEFT') {
-        lastCell.x = firstCell.x - tileSize;
+        lastCell.sprite.x = firstCell.sprite.x - tileSize;
+        lastCell.sprite.y = firstCell.sprite.y;
+
+        lastCell.x = firstCell.x - 1;
         lastCell.y = firstCell.y;
       }
       else if (currentDirection == 'UP') {
+        lastCell.sprite.x = firstCell.sprite.x;
+        lastCell.sprite.y = firstCell.sprite.y - tileSize;
+
         lastCell.x = firstCell.x;
-        lastCell.y = firstCell.y - tileSize;
+        lastCell.y = firstCell.y - 1;
       }
       else if (currentDirection == 'DOWN') {
+        lastCell.sprite.x = firstCell.sprite.x;
+        lastCell.sprite.y = firstCell.sprite.y + tileSize;
+
         lastCell.x = firstCell.x;
-        lastCell.y = firstCell.y + tileSize;
+        lastCell.y = firstCell.y + 1;
       }
 
       snake.push(lastCell);
       firstCell = lastCell;
 
       if (addNew) {
-        snake.unshift(this.game.add.sprite(oldLastCellY, oldLastCelly, 'snakeCellImage'));
+        snake.unshift({
+          x: oldLastCellX,
+          y: oldLastCellY,
+          sprite: this.game.add.sprite(oldLastCellSpriteX, oldLastCellSpriteY, 'snakeCellImage')
+        });
         addNew = false;
       }
 
