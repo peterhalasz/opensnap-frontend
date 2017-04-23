@@ -36,6 +36,10 @@
         "\n\t} else if (head.y < food.y) {\n\t\treturn 'DOWN';" +
         "\n\t} else {\n\t\treturn 'UP';\n\t}" +
         "\n};\n", -1);
+
+        if (this.snippet) {
+          $ctrl.editor.setValue(this.snippet.code, -1);
+        }
     };
 
     $ctrl.onRunClick = function (ev) {
@@ -54,7 +58,7 @@
 
     $ctrl.updateSnippet = function () {
       if ($ctrl.newSnippetForm.invalid) return;
-      var toastText = 'Snipped saved successfully!';
+      var toastText = 'Snippet saved successfully!';
       $ctrl.snippet.code = $ctrl.editor.getValue();
       OsSnippetApi.service.save($ctrl.snippet).$promise.then(function (data) {
         $ctrl.snippet.id = data.id;
