@@ -32,7 +32,7 @@
         "\n\t} else if (head.x < food.x) {\n\t\treturn 'RIGHT';" +
         "\n\t} else if (head.y < food.y) {\n\t\treturn 'DOWN';" +
         "\n\t} else {\n\t\treturn 'UP';\n\t}" +
-        "\n};\n");
+        "\n};\n", -1);
     };
 
     $ctrl.onRunClick = function (ev) {
