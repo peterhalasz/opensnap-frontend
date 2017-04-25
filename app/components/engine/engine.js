@@ -20,6 +20,7 @@ var Game = {
     newDirection = null;
     addNew = false;
     map = this.createInitialMap();
+    alive = true;
 
     this.game.world.setBounds(0, 0, mapSize * tileSize, mapSize * tileSize);
 
@@ -135,7 +136,7 @@ var Game = {
   checkSelfCollision: function (head) {
     for (var i = 0; i < snake.length - 1; i++) {
       if (head.x == snake[i].x && head.y == snake[i].y) {
-        this.state.start('GameOver');
+        alive = false;
       }
     }
   },
@@ -143,7 +144,7 @@ var Game = {
   checkObstacleCollision: function (head) {
     var mapTile = map[head.x][head.y];
     if (mapTile.type == 'O') {
-      this.state.start('GameOver');
+      alive = false;
     }
   },
 
@@ -162,12 +163,14 @@ var Game = {
   update: function () {
     updateDelay++;
 
-    if (updateDelay % (10 - speed) == 0) {
-      var snakeHead = this.repositionSnake();
+    if (alive) {
+      if (updateDelay % (10 - speed) == 0) {
+        var snakeHead = this.repositionSnake();
 
-      this.checkFoodCollision();
-      this.checkSelfCollision(snakeHead);
-      this.checkObstacleCollision(snakeHead);
+        this.checkFoodCollision();
+        this.checkSelfCollision(snakeHead);
+        this.checkObstacleCollision(snakeHead);
+      }
     }
   },
 
@@ -233,21 +236,5 @@ var Game = {
     }
 
     return firstCell;
-  }
-};
-
-var GameOver = {
-  create: function () {
-    this.game.add.text(240, 280, 'FINAL SCORE:', {
-      font: 'bold 16px sans-serif',
-      fill: '#46c0f9',
-      align: 'center'
-    });
-
-    this.game.add.text(360, 280, score.toString(), {
-      font: 'bold 16px sans-serif',
-      fill: '#fff',
-      align: 'center'
-    });
   }
 };

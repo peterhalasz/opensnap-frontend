@@ -17,7 +17,6 @@
       } else {
         $ctrl.game = new Phaser.Game(610, 610, Phaser.AUTO, 'snake');
         $ctrl.game.state.add('Game', Game);
-        $ctrl.game.state.add('GameOver', GameOver);
         Game.code = gameCode1;
       }
 
