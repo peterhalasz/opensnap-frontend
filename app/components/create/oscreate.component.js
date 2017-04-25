@@ -29,7 +29,7 @@
         "*\t\t the x and y coordinates and the type of the cell\n" +
         "*\t\t 'O' for obstactle and 'T' for tile\n" +
         "* return 'UP', 'RIGHT', 'LEFT' or 'RIGHT'\n" +
-        "*/\nthis.moveSnake = function(snake, food) {" +
+        "*/\nthis.moveSnake = function(snake, food, map) {" +
         "\n\tvar head = snake[snake.length-1];" +
         "\n\tif (head.x > food.x) {\n\t\treturn 'LEFT';" +
         "\n\t} else if (head.x < food.x) {\n\t\treturn 'RIGHT';" +
