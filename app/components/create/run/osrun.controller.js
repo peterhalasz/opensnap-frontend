@@ -9,25 +9,25 @@
     var $ctrl = this;
 
     $ctrl.initGame = function () {
-      $ctrl.game1 = new Phaser.Game(610, 610, Phaser.AUTO, 'snake1');
-      $ctrl.game1.state.add('Game', Game1);
-      $ctrl.game1.state.add('GameOver', GameOver);
+      $ctrl.game = new Phaser.Game(610, 610, Phaser.AUTO, 'snake1');
+      $ctrl.game.state.add('Game', Game);
+      $ctrl.game.state.add('GameOver', GameOver);
       $ctrl.isLoading = false;
-      Game1.code = gameCode1;
+      Game.code = gameCode1;
 
-      if (gameCode2) {
-        $ctrl.game2 = new Phaser.Game(610, 610, Phaser.AUTO, 'snake2');
-        $ctrl.game2.state.add('Game', Game2);
-        $ctrl.game2.state.add('GameOver', GameOver);
-        Game2.code = gameCode2;
+      // if (gameCode2) {
+      //   $ctrl.game2 = new Phaser.Game(610, 610, Phaser.AUTO, 'snake2');
+      //   $ctrl.game2.state.add('Game', Game2);
+      //   $ctrl.game2.state.add('GameOver', GameOver);
+      //   Game2.code = gameCode2;
 
-      }
-      $ctrl.game1.state.start('Game');
-      $ctrl.game2.state.start('Game');
+      // }
+      $ctrl.game.state.start('Game');
+      // $ctrl.game2.state.start('Game');
     };
 
     $scope.$on('$destroy', function () {
-      $ctrl.game1.destroy();
+      $ctrl.game.destroy();
     });
 
     $ctrl.close = function () {
