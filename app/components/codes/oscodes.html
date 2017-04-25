@@ -7,9 +7,24 @@
       </div>
       <div class="list-button-right">
         <md-button class="md-icon-button" ui-sref="edit({id: snippet._id})">
-          <md-icon class="material-icons">arrow_right</md-icon>
+          <md-icon class="material-icons">edit</md-icon>
         </md-button>
+        <md-checkbox md-no-ink ng-model="snippet.markToRun"
+                     ng-disabled="!$ctrl.canMark() && !snippet.markToRun" ng-change="$ctrl.checkboxSelected(snippet)" aria-label="No Ink Effects">
+          Select for competition mode
+        </md-checkbox>
       </div>
     </md-list-item>
   </md-list>
+  <md-fab-speed-dial  md-direction="left" md-open="demo.isOpen"
+                       class="md-scale md-fab-bottom-right" style="position: fixed!important;">
+      <md-fab-trigger>
+        <md-button aria-label="menu" class="md-fab md-warn" ng-click="$ctrl.runCompetition()">
+          <md-icon class="material-icons">arrow_right</md-icon>
+        </md-button>
+      </md-fab-trigger>
+
+      <md-fab-actions>
+      </md-fab-actions>
+    </md-fab-speed-dial>
 </md-card>

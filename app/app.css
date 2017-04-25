@@ -84,7 +84,7 @@ ui-view {
 
 .os-run-dialog {
     height: 675px;
-    width: 610px;
+    width: 100%;
 }
 
 .os-run-dialog-content {

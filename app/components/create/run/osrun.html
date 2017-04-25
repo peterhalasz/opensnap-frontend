@@ -13,7 +13,10 @@
     <div layout="row" layout-align="center center" class="os-run-loader" ng-if="$ctrl.isLoading">
       <md-progress-circular md-mode="indeterminate" md-diameter="120"></md-progress-circular>
     </div>
-    <div id="snake"></div>
+    <div layout="row" layout-align="center center"><div id="snake1"></div>
+    <div id="snake2"></div>
+    </div>
+
     <div layout-padding layout="row" ng-if="!$ctrl.isLoading" class="md-whiteframe-z5">
       <span>Here we can display game stats, or any relevant information</span>
     </div>

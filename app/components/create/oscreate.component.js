@@ -51,7 +51,8 @@
         clickOutsideToClose: false,
         controllerAs: '$ctrl',
         locals: {
-          gameCode: $ctrl.editor.getValue()
+          gameCode1: $ctrl.editor.getValue(),
+          gameCode2: null
         }
       });
     };
